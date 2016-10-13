@@ -107,6 +107,7 @@ namespace GameProgramSub1
         //球面線形補間
         public Quaternion Slerp(Quaternion from, Quaternion to, float t)
         {
+            //そもそも計算がいらない
             if (t >= 1) return to;
             if (t <= 0) return from;
 
@@ -118,17 +119,22 @@ namespace GameProgramSub1
 
             //ルートの中身が負の値だと虚数になってしまう
             if(temp <= 0) return from;
+
+            float sinTheta = (float)Math.Sqrt(temp);
+
             //sinθが０の場合同じ方向を向いている
-            if (Math.Sqrt(temp) == 0.0) return from; 
+            if (sinTheta == 0.0) return from;
 
-
+            //本来cosθ = (q1・q2) / abs(q1) * abs(q2)なのだが
+            //球面線形補間では単位球面上で考えるため長さは１となり
+            //cosθ = (q1・q2)となる
+            float theta = (float)Math.Acos(dot);
             //q1,q2間を動くqは下記の式で求められる
             //        sin(1-t)θ          sin tθ
             //q =    ---------- q1   +  ----------q2
             //          sinθ              sinθ
-            float theta = (float)Math.Acos(dot);
-            float temp1 = (float)Math.Sin((1 - t) * theta) / (float)Math.Sin(theta);
-            float temp2 = (float)Math.Sin(t * theta) / (float)Math.Sin(theta);
+            float temp1 = (float)Math.Sin((1 - t) * theta) / sinTheta;
+            float temp2 = (float)Math.Sin(t * theta) / sinTheta;
             return (from * temp1) + (to * temp2);
         }
     }
