@@ -57,6 +57,7 @@ namespace GameProgramSub1
             return new Quaternion(q1.w * a, q1.v * a);
         }
 
+        /*メソッド*/
         //共役
         public Quaternion GetConjugate(Quaternion q)
         {
@@ -68,7 +69,6 @@ namespace GameProgramSub1
         /// </summary>
         /// <param name="theta">回転量(弧度)</param>
         /// <param name="axis">回転軸(単位ベクトル)</param>
-        /// <returns></returns>
         public Quaternion Rotation(float theta,Vector3 axis)
         {
             //q'= rqr*
@@ -86,7 +86,6 @@ namespace GameProgramSub1
         /// <param name="theta">回転量(弧度)</param>
         /// <param name="axis">回転軸(単位ベクトル)</param>
         /// <param name="q">回転させたいQuaternion</param>
-        /// <returns></returns>
         public Quaternion Rotation(float theta, Vector3 axis,Quaternion q)
         {
             //q'= rqr*
@@ -112,7 +111,7 @@ namespace GameProgramSub1
             if (t <= 0) return from;
 
             //fromとtoの内積を求め、sinθを出す
-            //「DirectX 3Dリアルタイムアニメーション」より
+            //「DirectX 3Dリアルタイムアニメーション」p236より
             //sinθ = √1 - (q1・q2)^2
             float dot = Dot(from, to);
             float temp = 1 - (dot * dot);
