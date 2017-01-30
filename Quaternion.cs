@@ -58,7 +58,7 @@ namespace GameProgramSub1
         }
 
         /*メソッド*/
-        //共役
+        //共役(きょうえき)
         public Quaternion GetConjugate(Quaternion q)
         {
             return new Quaternion(q.w, v * -1);

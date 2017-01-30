@@ -49,5 +49,10 @@ namespace GameProgramSub1
                 (vec1.x * vec2.y) - (vec1.y * vec2.x)
                 );
         }
+
+        public static Vector3 Lerp(Vector3 vec1, Vector3 vec2, float t)
+        {
+            return vec1 + ((vec2 - vec1) / t);
+        }
     }
 }
